@@ -16,11 +16,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
+let analytics;
+
 if (!getApps()?.length) {
-  initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+    if (app.name && typeof window !== "undefined") {
+      analytics = getAnalytics(app);
+    }
 }
 
-export const analytics = getAnalytics();
+export { analytics };
 export const db = getFirestore();
 export const storage = getStorage();
 export const auth = getAuth();
