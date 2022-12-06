@@ -6,7 +6,7 @@ type LayoutProps = {
 
 const Layout:React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="font-common">
+    <div className="font-common text-black">
       {children}
     </div>
   )
