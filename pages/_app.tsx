@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { AuthProvider } from "../context/auth";
 import Layout from "../components/Layout";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Header />
         <Component {...pageProps} />
+        <Footer/>
       </Layout>
     </AuthProvider>
   );
