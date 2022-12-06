@@ -19,11 +19,11 @@ const Header: React.FC = () => {
           />
         </Link>
 
-        <Button href="/login" text="Login" styles="bg-gray-200 ml-auto hover:bg-gray-300" />
+        <Button href="/login" text="Login" styles="bg-gray-200 ml-auto hover:bg-gray-300 font-futura" />
         <Button
           href="/register"
           text="Register"
-          styles="ml-4 bg-primary text-white hover:bg-hoverPrimary"
+          styles="ml-4 bg-primary text-white hover:bg-hoverPrimary font-futura"
         />
       </div>
     </header>

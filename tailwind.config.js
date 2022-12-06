@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         common: ["Noto Sans JP", "sans-serif"],
+        futura: ["futura-pt", "sans-serif"],
       },
       colors: {
         primary: "#31BFFD",
