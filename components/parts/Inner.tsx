@@ -6,7 +6,7 @@ type InnerProps = {
 }
 
 const Inner: React.FC<InnerProps> = ({children, styles}) => {
-  return <div className={`max-w-[1312px] px-7 mx-auto ${styles}`}>{children}</div>;
+  return <div className={`max-w-[1420px] px-7 mx-auto ${styles}`}>{children}</div>;
 }
 
 export default Inner; 
