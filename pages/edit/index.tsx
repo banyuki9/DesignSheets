@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Inner from "../../components/parts/Inner";
 import CheckBox from "../../components/parts/Checkbox";
+import Button from "../../components/parts/Button";
 import EditListItem from "../../components/parts/EditListItem";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import Image from "next/image";
@@ -9,25 +10,27 @@ import Image from "next/image";
 export default function Edit() {
   const [bgColor, setBgColor] = useState<string>("white");
   const [hasBoardBgImage, setHasBoardBgImage] = useState<boolean>(true);
-
   const changeBoardBgColor = () => {
     bgColor === "white" ? setBgColor("gray-200") : setBgColor("white");
   };
 
-  const changehasBoardBgImage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    hasBoardBgImage
-      ? setHasBoardBgImage(!hasBoardBgImage)
-      : setHasBoardBgImage(hasBoardBgImage);
-  };
-
   const { editor, onReady } = useFabricJSEditor();
+
   const onAddCircle = () => {
     editor?.addCircle();
   };
+
   const onAddRectangle = () => {
     editor?.addRectangle();
+  };
+
+  const deleteObject = () => {
+    let activeObjects = editor?.canvas.getActiveObjects();
+    if (activeObjects.length && confirm("選択されたオブジェクトを全て削除しますか？")) {
+      activeObjects.forEach((obj) => {
+        editor?.canvas.remove(obj);
+      });
+    }
   };
 
   return (
@@ -58,29 +61,50 @@ export default function Edit() {
                   className={`border rounded-sm border-black w-6 h-6`}
                 ></figure>
               </EditListItem>
+              <EditListItem text="ばつ印" editFunction={onAddRectangle}>
+                <figure className="w-6 h-6">
+                  <Image
+                    width="24"
+                    height="24"
+                    src="/img/common/cross.svg"
+                    alt="ばつ印のロゴ"
+                  />
+                </figure>
+              </EditListItem>
             </ul>
           </div>
 
-          <div className="mainBoard w-[82%] relative">
-            <FabricJSCanvas
-              className={`board-canvas h-[567px] rounded-xl border-[3px] border-gray-200 bg-${bgColor}`}
-              onReady={onReady}
-            />
-            <Image
-              src="/img/common/boardBg.svg"
-              alt=""
-              layout="fill"
-              className={`pointer-events-none ${
-                hasBoardBgImage ? "visible" : "hidden"
-              }`}
-            />
-            <CheckBox
-              checked={hasBoardBgImage}
-              onChange={(e) => setHasBoardBgImage(!hasBoardBgImage)}
-              styles="mt-4"
-            >
-              舞台を表示
-            </CheckBox>
+          <div className="mainBoard w-[82%] ">
+            <div className="relative">
+              <FabricJSCanvas
+                className={`board-canvas h-[567px] rounded-xl border-[3px] border-gray-200 bg-${bgColor}`}
+                onReady={onReady}
+              />
+              <Image
+                src="/img/common/boardBg.svg"
+                alt=""
+                layout="fill"
+                className={`pointer-events-none ${
+                  hasBoardBgImage ? "visible" : "hidden"
+                }`}
+              />
+            </div>
+
+            <div className="mainBoard-bottom flex justify-between items-center mt-4">
+              <CheckBox
+                checked={hasBoardBgImage}
+                onChange={(e) => setHasBoardBgImage(!hasBoardBgImage)}
+              >
+                舞台を表示
+              </CheckBox>
+
+              <Button
+                buttonFunc={deleteObject}
+                styles="bg-rose-500 text-white hover:bg-rose-600 text-sm"
+              >
+                選択要素の削除
+              </Button>
+            </div>
           </div>
         </Inner>
       </main>

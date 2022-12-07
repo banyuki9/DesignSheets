@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Button from "./parts/Button"
+import Button from "./parts/LinkButton"
 
 const Header: React.FC = () => {
   return (

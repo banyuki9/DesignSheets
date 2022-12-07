@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Common.module.css'
 import Inner from "../components/parts/Inner"
-import Button from "../components/parts/Button"
+import Button from "../components/parts/LinkButton"
 
 export default function Home() {
   return (

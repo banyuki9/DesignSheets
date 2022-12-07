@@ -1,22 +1,24 @@
 import { ReactNode } from "react";
-import Link from "next/link";
 
 type ButtonProps = {
-  href: string,
-  text?: string,
-  styles?: string,
-  children?: ReactNode
+  text?: string;
+  styles?: string;
+  children?: ReactNode;
+  buttonFunc: Function
 };
 
-const Button: React.FC<ButtonProps> = ({ href, text, styles, children }) => {
+const Button: React.FC<ButtonProps> = ({ text, styles, children, buttonFunc }) => {
+  const clickHandler = () => {
+    buttonFunc();
+  }
   return (
-    <Link
-      href={href}
-      className={`block rounded-md py-2 px-4 text-lg font-medium ${styles}`}
+    <button
+      onClick={clickHandler}
+      className={`block rounded-md py-2 px-4 font-medium ${styles}`}
     >
-      {text && text}
       {children}
-    </Link>
+      {text && text}
+    </button>
   );
 };
 
