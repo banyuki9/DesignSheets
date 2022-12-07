@@ -1,14 +1,25 @@
 import Head from "next/head";
 import { useState } from "react";
 import Inner from "../../components/parts/Inner";
+import CheckBox from "../../components/parts/Checkbox";
 import EditListItem from "../../components/parts/EditListItem";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
+import Image from "next/image";
 
 export default function Edit() {
   const [bgColor, setBgColor] = useState<string>("white");
+  const [hasBoardBgImage, setHasBoardBgImage] = useState<boolean>(true);
 
   const changeBoardBgColor = () => {
     bgColor === "white" ? setBgColor("gray-200") : setBgColor("white");
+  };
+
+  const changehasBoardBgImage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    hasBoardBgImage
+      ? setHasBoardBgImage(!hasBoardBgImage)
+      : setHasBoardBgImage(hasBoardBgImage);
   };
 
   const { editor, onReady } = useFabricJSEditor();
@@ -50,11 +61,26 @@ export default function Edit() {
             </ul>
           </div>
 
-          <div className="mainBoard w-[82%]">
+          <div className="mainBoard w-[82%] relative">
             <FabricJSCanvas
               className={`board-canvas h-[567px] rounded-xl border-[3px] border-gray-200 bg-${bgColor}`}
               onReady={onReady}
             />
+            <Image
+              src="/img/common/boardBg.svg"
+              alt=""
+              layout="fill"
+              className={`pointer-events-none ${
+                hasBoardBgImage ? "visible" : "hidden"
+              }`}
+            />
+            <CheckBox
+              checked={hasBoardBgImage}
+              onChange={(e) => setHasBoardBgImage(!hasBoardBgImage)}
+              styles="mt-4"
+            >
+              舞台を表示
+            </CheckBox>
           </div>
         </Inner>
       </main>
