@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import Inner from "../../components/parts/Inner";
-import CheckBox from "../../components/parts/Checkbox";
+import CheckBox from "../../components/parts/CheckBox";
 import Button from "../../components/parts/Button";
 import EditListItem from "../../components/parts/EditListItem";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
@@ -83,8 +83,8 @@ export default function Edit() {
               <Image
                 src="/img/common/boardBg.svg"
                 alt=""
-                layout="fill"
-                className={`pointer-events-none ${
+                fill
+                className={`pointer-events-none  ${
                   hasBoardBgImage ? "visible" : "hidden"
                 }`}
               />
