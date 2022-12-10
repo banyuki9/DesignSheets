@@ -34,9 +34,7 @@ export default function Edit() {
 
   const deleteObject = () => {
     if (selectedObjects && selectedObjects.length && confirm("選択されたオブジェクトを削除しますか？")) {
-      selectedObjects.forEach((obj) => {
-        editor?.canvas.remove(obj);
-      });
+      editor?.deleteSelected();
     }
   };
 
