@@ -4,6 +4,7 @@ import Inner from "../../components/parts/Inner";
 import CheckBox from "../../components/parts/CheckBox";
 import Button from "../../components/parts/Button";
 import EditListItem from "../../components/parts/EditListItem";
+import { fabric } from "fabric";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import Image from "next/image";
 
@@ -23,6 +24,13 @@ export default function Edit() {
   const onAddRectangle = () => {
     editor?.addRectangle();
   };
+
+  const onAddCrossImage = () => { 
+      fabric.Image.fromURL("/img/common/cross.svg", function (oImg: object) {
+        editor?.canvas.add(oImg);
+      });
+  };
+  
 
   const deleteObject = () => {
     if (selectedObjects && selectedObjects.length && confirm("選択されたオブジェクトを削除しますか？")) {
@@ -60,7 +68,7 @@ export default function Edit() {
                   className={`border rounded-sm border-black w-6 h-6`}
                 ></figure>
               </EditListItem>
-              <EditListItem text="ばつ印" editFunction={onAddRectangle}>
+              <EditListItem text="ばつ印" editFunction={onAddCrossImage}>
                 <figure className="w-6 h-6">
                   <Image
                     width="24"
