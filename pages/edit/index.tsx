@@ -14,7 +14,7 @@ export default function Edit() {
     bgColor === "white" ? setBgColor("gray-200") : setBgColor("white");
   };
 
-  const { editor, onReady } = useFabricJSEditor();
+  const { editor, onReady, selectedObjects } = useFabricJSEditor();
 
   const onAddCircle = () => {
     editor?.addCircle();
@@ -25,9 +25,8 @@ export default function Edit() {
   };
 
   const deleteObject = () => {
-    let activeObjects = editor?.canvas.getActiveObjects();
-    if (activeObjects.length && confirm("選択されたオブジェクトを全て削除しますか？")) {
-      activeObjects.forEach((obj) => {
+    if (selectedObjects && selectedObjects.length && confirm("選択されたオブジェクトを削除しますか？")) {
+      selectedObjects.forEach((obj) => {
         editor?.canvas.remove(obj);
       });
     }
