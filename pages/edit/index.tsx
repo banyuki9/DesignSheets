@@ -25,15 +25,30 @@ export default function Edit() {
     editor?.addRectangle();
   };
 
+  const onAddText = () => {
+    editor?.addText("テキストを入力してください");
+  }
+
   const onAddCrossImage = () => { 
       fabric.Image.fromURL("/img/common/cross.svg", function (oImg: object) {
         editor?.canvas.add(oImg);
       });
   };
-  
+
+  const onAddTImage = () => { 
+      fabric.Image.fromURL("/img/common/t.svg", function (oImg: object) {
+        editor?.canvas.add(oImg);
+      });
+  };
+
+  const onAddPianoImage = () => { 
+      fabric.Image.fromURL("/img/common/piano_logo.svg", function (oImg: object) {
+        editor?.canvas.add(oImg);
+      });
+  };
 
   const deleteObject = () => {
-    if (selectedObjects && selectedObjects.length && confirm("選択されたオブジェクトを削除しますか？")) {
+    if (selectedObjects && selectedObjects.length) {
       editor?.deleteSelected();
     }
   };
@@ -73,6 +88,36 @@ export default function Edit() {
                     height="24"
                     src="/img/common/cross.svg"
                     alt="ばつ印のロゴ"
+                  />
+                </figure>
+              </EditListItem>
+              <EditListItem text="T字" editFunction={onAddTImage}>
+                <figure className="w-6 h-6">
+                  <Image
+                    width="24"
+                    height="24"
+                    src="/img/common/t.svg"
+                    alt="T字のロゴ"
+                  />
+                </figure>
+              </EditListItem>
+              <EditListItem text="テキスト" editFunction={onAddText}>
+                <figure className="w-6 h-6">
+                  <Image
+                    width="24"
+                    height="24"
+                    src="/img/common/text_logo.svg"
+                    alt="Aの文字のロゴ"
+                  />
+                </figure>
+              </EditListItem>
+              <EditListItem text="ピアノ" editFunction={onAddPianoImage}>
+                <figure className="w-6 h-6">
+                  <Image
+                    width="24"
+                    height="24"
+                    src="/img/common/piano_logo.svg"
+                    alt="ピアノ"
                   />
                 </figure>
               </EditListItem>
